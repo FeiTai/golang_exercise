@@ -1,0 +1,18 @@
+### 字符逆序
+
+```go
+func ReverseString(s string) (res string){
+    r := []rune(s)
+    for i := 0; i<len(r) / 2; i++ {
+        r[len(r)-1-i], r[i] = r[i], r[len(r)-1-i]
+    }
+    res = string(r)
+    return r
+}
+
+func main()  {
+    a := "世界人民大团结万岁"
+    str := ReverseString(a)
+    fmt.Println(str)//岁万结团大民人界世
+}
+```
