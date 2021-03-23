@@ -1,0 +1,32 @@
+## 将切片插入到另一个切片的指定位置
+
+思路：利用 `copy()` 函数特性:
+
+>第一次copy将原index后的数据进行拷贝至切片末尾
+> 
+> 第二次copy是进行覆盖原index位置的值，切片有多长，覆盖就有多长
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func InsertStringSlice(dst, src []int, index int) (newSlice []int) {
+	dst = append(dst, src...)               //解包操作
+	copy(dst[index+len(src):], dst[index:]) //拷贝原index后所有的值至切片末尾
+	copy(dst[index:], src)                  //在指定Index插入切片进行覆盖原数据
+	newSlice = dst
+	return
+}
+
+func main()  {
+	a := []int{1,2,6,7,8}
+	b := []int{3,4,5}
+	
+	ns := InsertStringSlice(a,b,2)
+	fmt.Println(ns)//[1 2 3 4 5 6 7 8]
+}
+
+```
